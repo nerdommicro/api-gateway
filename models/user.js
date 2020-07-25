@@ -14,3 +14,16 @@ let UserSchema = new Schema({
   email: {type: String, required: true}
 });
 module.exports = mongoose.model('User', UserSchema);
+
+
+
+/* New code 7/26 **/ 
+module.exports.add = (user, callback) => { 
+  user.save(callback);
+};
+
+module.exports.getById = (id, callback) => { 
+  var query = { _id: id };
+  User.findById(query, callback);  
+};
+/* new code end */
