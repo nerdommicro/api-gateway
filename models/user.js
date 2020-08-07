@@ -13,7 +13,7 @@ let UserSchema = new Schema({
   password: {type: String, required: true},
   email: {type: String, required: true}
 });
-module.exports = mongoose.model('User', UserSchema);
+const User = module.exports = mongoose.model('User', UserSchema);
 
 
 
