@@ -17,7 +17,6 @@ const User = module.exports = mongoose.model('User', UserSchema);
 
 
 
-/* New code 7/26 **/ 
 module.exports.add = (user, callback) => { 
   user.save(callback);
 };
@@ -26,4 +25,8 @@ module.exports.getById = (id, callback) => {
   var query = { _id: id };
   User.findById(query, callback);  
 };
-/* new code end */
+/*new code 8/2020*/
+module.exports.getOne = (email, callback) => {  
+  var query = { email: email };
+  User.findOne(query, callback);
+}

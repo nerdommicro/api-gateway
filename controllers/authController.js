@@ -61,3 +61,20 @@ exports.user_register = function (req, res) {
     })
   }
   // END OF NEW CODE
+  //new code 8/2020 week 6
+  exports.user_login = (req, res) => {
+    User.getOne(req.body.email, (err, user) => {
+      if (err) return res.status(500).send('Error on server.');
+      if (!user) return res.status(404).send('No user found.');  
+      var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+      if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });    
+      var token = jwt.sign({ id: user._id }, config.web.secret, { 
+        expiresIn: 86400 //24hrs
+      });  
+      res.status(200).send({ auth: true, token: token }); 
+    });
+  };
+//new code 8/2020 week 6
+  exports.user_logout = (req, res) => {
+    res.status(200).send({ auth: false, token: null }); 
+  };
